@@ -4,9 +4,9 @@ import {base_url, period_month} from "../utils/constants.ts";
 const Contact = () => {
     const [planets, setPlanets] = useState(['wait...']);
 
-    async function fillPlanets(url:string) {
+    async function fillPlanets(url: string): Promise<void> {
         const response = await fetch(url);
-        const data:{name:string}[] = await response.json();
+        const data: {name:string} [] = await response.json();
         const planets = data.map(item => item.name);
         setPlanets(planets);
         localStorage.setItem('planets', JSON.stringify({

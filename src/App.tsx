@@ -1,21 +1,21 @@
-
+import './App.css'
 import Header from "./components/Header.tsx";
 import Main from "./components/Main.tsx";
 import Footer from "./components/Footer.tsx";
 import {useState} from "react";
-import {navItems} from "./utils/constants.ts";
-import {SWContext} from "./utils/context.ts";
+import {HeroNameContext} from "./utils/context.ts";
+
 
 function App() {
-    const [page, setPage] = useState(navItems[0]);
+    const [heroName, setHeroName] = useState('Star Wars');
 
     return (
         <div>
-            <SWContext.Provider value={{page, changePage: setPage}}>
-                <Header/>
-                <Main/>
-            </SWContext.Provider>
-            <Footer/>
+        <HeroNameContext.Provider value={{heroName, setHeroName }}>
+            <Header/>
+            <Main/>
+        </HeroNameContext.Provider>
+        <Footer/>
         </div>
     )
 }

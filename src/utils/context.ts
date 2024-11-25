@@ -1,7 +1,13 @@
 import {createContext} from "react";
-import {SWContextValue} from "./types";
+import {HeroNameContextType, SWContextValue} from "./types";
 
 export const SWContext = createContext<SWContextValue>({
-    page:'Home',
-    changePage:(page:string) => console.log(page),
+    page: 'Home',
+    changePage: (page: string) => console.log(page),
 });
+
+export const HeroNameContext = createContext<HeroNameContextType>({
+    heroName: '',
+    setHeroName: (name: string) => console.log(name),
+});
+

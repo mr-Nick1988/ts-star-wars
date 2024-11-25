@@ -1,17 +1,26 @@
-import {useContext} from "react";
-import {SWContext} from "../utils/context.ts";
-
+import {Item} from "../utils/types";
+import {NavLink} from "react-router-dom";
 
 interface Props {
-    itemTitle:string,
+    item: Item,
 }
-
-const NavItem = ({itemTitle}:Props) => {
-    const {changePage} = useContext(SWContext);
-
+const NavItem = ({item}: Props) => {
     return (
-        <li onClick={() => changePage(itemTitle)} className={`bg-red-color border-black border-2 rounded-[5px] px-3 py-2 cursor-pointer hover:text-white hover:bg-red-500`}>{itemTitle}</li>
-    );
+            <NavLink
+                className={
+                `bg-red-color 
+                border-black 
+                border-2 
+                rounded-[5px] 
+                px-3 
+                py-2 
+                cursor-pointer 
+                hover:text-white 
+                hover:bg-red-500`
+            }
+               to={`/${item.path}`}> {item.title}
+            </NavLink>
+            );
 };
 
 export default NavItem;
