@@ -12,14 +12,13 @@ import {Characters, Item} from "./types";
 
 export const base_url = 'https://sw-info-api.herokuapp.com';
 export const version = '/v1';
-
-export const navItems: Item [] = [
+export const navItems: Item[] = [
     {title: 'Home', path: 'home'},
     {title: 'About me', path: 'about_me'},
     {title: 'Star Wars', path: 'star_wars'},
-    {title: 'Contact', path: 'contact_me'}
+    {title: 'Contact', path: 'contact'}
 ];
-export const friends = [friend1, friend2, friend3, friend4, friend5, friend6, friend7, friend8, friend9];
+
 export const period_month = 30 * 24 * 60 * 60 * 1000;
 export const starWarsInfo = `Star Wars is an American epic space opera media franchise created by George Lucas, which began with the eponymous 1977 film[a] and quickly became a worldwide pop culture phenomenon. The franchise has been expanded into various films and other media, including television series, video games, novels, comic books, theme park attractions, and themed areas, comprising an all-encompassing fictional universe. Star Wars is one of the highest-grossing media franchises of all time.
 
@@ -27,7 +26,7 @@ The original 1977 film, retroactively subtitled Episode IV: A New Hope, was foll
 
 All nine films, collectively referred to as the "Skywalker Saga", were nominated for Academy Awards, with wins going to the first two releases. Together with the theatrical live action "anthology" films Rogue One (2016) and Solo (2018), the combined box office revenue of the films equate to over US$10 billion, making Star Wars the third-highest-grossing film franchise of all time.`
 
-export const  characters: Characters = {
+export const characters: Characters = {
     luke: {
         name: "Luke Skywalker",
         img: friend0,
@@ -79,7 +78,5 @@ export const  characters: Characters = {
         url: `${base_url+version}/transports/10`
     }
 };
-
 export const defaultHero = 'luke';
-
-
+export const friends = Object.keys(characters);

@@ -1,11 +1,6 @@
 export interface SWContextValue {
-    page: string,
-    changePage: (page: string) => void,
-}
-
-export interface HeroNameContextType {
-    heroName: string;
-    setHeroName: (name: string) => void;
+    hero: string,
+    changeHero: (hero: string) => void
 }
 
 export interface HeroInfo {
@@ -26,11 +21,10 @@ export interface Item {
 
 export interface Hero {
     name: string,
-    img: string | object,
+    img: string,
     url: string
 }
 
 export interface Characters {
-    [key: string]: Hero;
+    [key: string]: Hero
 }
-

@@ -3,21 +3,21 @@ import Header from "./components/Header.tsx";
 import Main from "./components/Main.tsx";
 import Footer from "./components/Footer.tsx";
 import {useState} from "react";
-import {HeroNameContext} from "./utils/context.ts";
-
+import {defaultHero} from "./utils/constants.ts";
+import {SWContext} from "./utils/context.ts";
 
 function App() {
-    const [heroName, setHeroName] = useState('Star Wars');
+    const [hero, setHero,] = useState(defaultHero);
 
     return (
-        <div>
-        <HeroNameContext.Provider value={{heroName, setHeroName }}>
-            <Header/>
-            <Main/>
-        </HeroNameContext.Provider>
+        <>
+            <SWContext.Provider value={{hero,changeHero:setHero}}>
+        <Header/>
+        <Main/>
         <Footer/>
-        </div>
-    )
+        </SWContext.Provider>
+    </>
+)
 }
 
 export default App

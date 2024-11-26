@@ -1,29 +1,28 @@
 import {useContext, useEffect, useState} from "react";
-import { characters, defaultHero, period_month} from "../utils/constants.ts";
-import { HeroInfo} from "../utils/types";
+import {characters, defaultHero, period_month} from "../utils/constants.ts";
+import {HeroInfo} from "../utils/types";
 import {useParams} from "react-router-dom";
-import {HeroNameContext} from "../utils/context.ts";
-
+import {SWContext} from "../utils/context.ts";
+import ErrorPage from "./ErrorPage.tsx";
 
 const AboutMe = () => {
     const [hero, setHero] = useState<HeroInfo>();
-    let {heroID = defaultHero} = useParams();
-    const {setHeroName} = useContext(HeroNameContext);
-
+    const {heroId = defaultHero} = useParams();
+    const {changeHero} = useContext(SWContext);
 
     useEffect(() => {
-        if(!characters[heroID]) {
-            heroID = defaultHero;
+        if (!characters[heroId]) {
+            return;
         }
-        const hero = JSON.parse(localStorage.getItem(heroID)!);
+        changeHero(heroId);
+        const hero = JSON.parse(localStorage.getItem(heroId)!);
         if (hero && ((Date.now() - hero.timestamp) < period_month)) {
             setHero(hero.payload);
-            setHeroName(hero.payload.name);
         } else {
-            fetch(characters[heroID].url)
+            fetch(characters[heroId].url)
                 .then(response => response.json())
                 .then(data => {
-                    const info: HeroInfo = {
+                    const info = {
                         name: data.name,
                         gender: data.gender,
                         birth_year: data.birth_year,
@@ -34,32 +33,27 @@ const AboutMe = () => {
                         eye_color: data.eye_color
                     }
                     setHero(info);
-                    setHeroName(info.name);
-                    localStorage.setItem(heroID, JSON.stringify({
+                    localStorage.setItem(heroId, JSON.stringify({
                         payload: info,
                         timestamp: Date.now()
                     }));
                 })
         }
-        return() =>
-            setHeroName(characters[defaultHero].name)
-    }, [])
 
-    return (
-        <>
-            {(!!hero) &&
-                <div className={`text-[2em] text-justify tracking-[.2em] leading-normal ml-8`}>
-                    {Object.keys(hero).map(key =>
-                        <p key={key}>
-                            <span
-                             className={`text-[1.25em] capitalize`}>{key.replace('_', ' ')}:
-                            </span>
-                          {hero[key as keyof HeroInfo]}
+    }, [heroId])
+
+    return characters[heroId] ? (
+            <>
+                {(!!hero) &&
+                    <div className={`text-[2em] text-justify tracking-[.2em] leading-normal ml-8`}>
+                        {Object.keys(hero).map(key => <p key={key}><span
+                            className={`text-[1.25em] capitalize`}>{key.replace('_', ' ')}:</span> {hero[key as keyof HeroInfo]}
                         </p>)}
-                </div>
-            }
-        </>
-    );
+                    </div>
+                }
+            </>
+        )
+        : <ErrorPage/>
 }
 
 export default AboutMe;
