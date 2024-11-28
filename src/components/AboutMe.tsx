@@ -1,20 +1,17 @@
-import {useContext, useEffect, useState} from "react";
+
+import { useEffect, useState} from "react";
 import {characters, defaultHero, period_month} from "../utils/constants.ts";
 import {HeroInfo} from "../utils/types";
 import {useParams} from "react-router-dom";
-import {SWContext} from "../utils/context.ts";
-import ErrorPage from "./ErrorPage.tsx";
+
+import WithErrorPage from "../hoc/WithErrorPage.tsx";
 
 const AboutMe = () => {
     const [hero, setHero] = useState<HeroInfo>();
     const {heroId = defaultHero} = useParams();
-    const {changeHero} = useContext(SWContext);
+
 
     useEffect(() => {
-        if (!characters[heroId]) {
-            return;
-        }
-        changeHero(heroId);
         const hero = JSON.parse(localStorage.getItem(heroId)!);
         if (hero && ((Date.now() - hero.timestamp) < period_month)) {
             setHero(hero.payload);
@@ -42,7 +39,7 @@ const AboutMe = () => {
 
     }, [heroId])
 
-    return characters[heroId] ? (
+    return  (
             <>
                 {(!!hero) &&
                     <div className={`text-[2em] text-justify tracking-[.2em] leading-normal ml-8`}>
@@ -53,7 +50,7 @@ const AboutMe = () => {
                 }
             </>
         )
-        : <ErrorPage/>
+
 }
 
-export default AboutMe;
+export default WithErrorPage(AboutMe);
