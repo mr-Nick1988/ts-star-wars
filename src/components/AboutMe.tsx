@@ -3,8 +3,8 @@ import { useEffect, useState} from "react";
 import {characters, defaultHero, period_month} from "../utils/constants.ts";
 import {HeroInfo} from "../utils/types";
 import {useParams} from "react-router-dom";
-
 import WithErrorPage from "../hoc/WithErrorPage.tsx";
+
 
 const AboutMe = () => {
     const [hero, setHero] = useState<HeroInfo>();

@@ -6,7 +6,7 @@ import { SWContextValue } from '../utils/types';
 import ErrorPage from "../components/ErrorPage.tsx"
 
 interface WithErrorPageProps {
-    heroId: string;
+    heroId?: string;
 }
 
 const WithErrorPage = <P extends WithErrorPageProps>(WrappedComponent: React.ComponentType<P>) => {
@@ -20,7 +20,6 @@ const WithErrorPage = <P extends WithErrorPageProps>(WrappedComponent: React.Com
                 console.error(`Hero with ID ${heroId} not found in characters.`);
                 return;
             }
-
             changeHero(heroId);
         }, [heroId, changeHero]);
 
