@@ -1,9 +1,23 @@
-const ErrorPage = () => {
+interface ErrorPageProps {
+    message: string;
+}
+
+const ErrorPage = ({ message }: ErrorPageProps) => {
     return (
         <div className={'text-3xl text-center tracking-widest leading-loose'}>
-            O-o-ops, something went wrong!
+            {message}
         </div>
     );
 };
 
 export default ErrorPage;
+
+
+
+
+
+
+
+
+
+

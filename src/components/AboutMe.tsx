@@ -6,6 +6,8 @@ import {useParams} from "react-router-dom";
 import WithErrorPage from "../hoc/WithErrorPage.tsx";
 
 
+
+
 const AboutMe = () => {
     const [hero, setHero] = useState<HeroInfo>();
     const {heroId = defaultHero} = useParams();
@@ -38,19 +40,22 @@ const AboutMe = () => {
         }
 
     }, [heroId])
-
-    return  (
-            <>
-                {(!!hero) &&
-                    <div className={`text-[2em] text-justify tracking-[.2em] leading-normal ml-8`}>
-                        {Object.keys(hero).map(key => <p key={key}><span
-                            className={`text-[1.25em] capitalize`}>{key.replace('_', ' ')}:</span> {hero[key as keyof HeroInfo]}
-                        </p>)}
-                    </div>
-                }
-            </>
-        )
-
-}
+    return (
+        <div>
+            {hero && (
+                <div className={`text-[2em] text-justify tracking-[.2em] leading-normal ml-8`}>
+                    {Object.keys(hero).map((key) => (
+                        <p key={key}>
+                            <span className={`text-[1.25em] capitalize`}>
+                                {key.replace('_', ' ')}:
+                            </span>{" "}
+                            {hero[key as keyof HeroInfo]}
+                        </p>
+                    ))}
+                </div>
+            )}
+        </div>
+    );
+};
 
 export default WithErrorPage(AboutMe);

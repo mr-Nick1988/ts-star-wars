@@ -6,12 +6,14 @@ import {useState} from "react";
 import {defaultHero} from "./utils/constants.ts";
 import {SWContext} from "./utils/context.ts";
 
+
 function App() {
     const [hero, setHero,] = useState(defaultHero);
+    const [error, setError] = useState<string | undefined>();
 
     return (
         <>
-            <SWContext.Provider value={{hero,changeHero:setHero}}>
+            <SWContext.Provider value={{hero,changeHero:setHero,error,setError}}>
         <Header/>
         <Main/>
         <Footer/>
